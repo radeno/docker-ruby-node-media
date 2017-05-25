@@ -1,9 +1,9 @@
-FROM smikino/ruby-node:latest
+FROM starefossen/ruby-node:latest
 
 # Install run dependencies packages
 RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get install -y \
+RUN apt-get install -y --no-install-recommends \
   mediainfo \
   imagemagick \
   advancecomp \
@@ -15,7 +15,7 @@ RUN apt-get install -y \
   pngcrush \
   pngquant
 
-RUN wget --progress=bar:force -O wkhtmltox.tar.xz http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+RUN curl -o wkhtmltox.tar.xz https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
   && tar xf wkhtmltox.tar.xz \
   && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin \
   && cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin \
