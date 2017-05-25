@@ -1,0 +1,5 @@
+ruby_node_media:
+  build: .
+
+ruby_node_media-slim:
+  build: slim/.
