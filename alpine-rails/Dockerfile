@@ -10,4 +10,5 @@ RUN apk add --no-cache --virtual .ruby-gems-builddeps \
 
 RUN apk add --no-cache --virtual .ruby-gems-rundeps \
   tzdata \
-  mariadb-client
+  mariadb-client \
+  mariadb-client-libs
