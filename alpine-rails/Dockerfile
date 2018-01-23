@@ -1,4 +1,4 @@
-FROM starefossen/ruby-node:alpine
+FROM smikino/ruby-node-media:alpine
 
 RUN apk add --no-cache --virtual .ruby-gems-builddeps \
   gcc \
