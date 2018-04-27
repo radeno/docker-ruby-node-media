@@ -1,9 +1,6 @@
 FROM starefossen/ruby-node:alpine
 
-# Install run dependencies packages
-RUN apk update && apk upgrade
-
-RUN apk add \
+RUN apk update && apk add \
   mediainfo \
   imagemagick \
   libvips-tools \
@@ -24,7 +21,7 @@ RUN apk add --virtual build-dependencies \
 
 # advancecomp
 RUN \
-  ADVANCECOMP_VERSION=2.0 \
+  ADVANCECOMP_VERSION=2.1 \
   && curl -L -O https://github.com/amadvance/advancecomp/releases/download/v$ADVANCECOMP_VERSION/advancecomp-$ADVANCECOMP_VERSION.tar.gz \
   && tar zxf advancecomp-$ADVANCECOMP_VERSION.tar.gz \
   && cd advancecomp-$ADVANCECOMP_VERSION \
