@@ -1,11 +1,9 @@
 FROM starefossen/ruby-node:latest
 
-# Install run dependencies packages
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   mediainfo \
   imagemagick \
+  libvips-tools \
   advancecomp \
   gifsicle \
   jhead \
