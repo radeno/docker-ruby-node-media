@@ -3,7 +3,6 @@ FROM starefossen/ruby-node:alpine
 RUN apk update && apk add \
   mediainfo \
   imagemagick \
-  libvips-tools \
   gifsicle \
   jpegoptim \
   libjpeg-turbo \
