@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   jhead \
   jpegoptim \
   libjpeg-progs \
+  libjpeg-turbo-progs \
   optipng \
   pngcrush \
   pngquant
