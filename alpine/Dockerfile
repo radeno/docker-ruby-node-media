@@ -49,6 +49,14 @@ RUN \
   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
   && make && make install
 
+# jpegtran (from Independent JPEG Group)
+RUN \
+  IJG_VERSION=9c \
+  && curl -O http://www.ijg.org/files/jpegsrc.v$IJG_VERSION.tar.gz \
+  && tar zxf jpegsrc.v$IJG_VERSION.tar.gz \
+  && cd jpeg-$IJG_VERSION \
+  && ./configure && make && make install
+
 RUN \
   WKHTMLTOX_VERSION=0.12.4 \
   && curl -L -o wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/$WKHTMLTOX_VERSION/wkhtmltox-$WKHTMLTOX_VERSION_linux-generic-amd64.tar.xz \
