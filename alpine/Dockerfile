@@ -58,7 +58,7 @@ RUN \
 
 RUN \
   WKHTMLTOX_VERSION=0.12.4 \
-  && curl -L -o wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/$WKHTMLTOX_VERSION/wkhtmltox-$WKHTMLTOX_VERSION_linux-generic-amd64.tar.xz \
+  && curl -L -o wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/$WKHTMLTOX_VERSION/wkhtmltox-${WKHTMLTOX_VERSION}_linux-generic-amd64.tar.xz \
   && tar xf wkhtmltox.tar.xz \
   && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin \
   && cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin \
