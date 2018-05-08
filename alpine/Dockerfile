@@ -1,39 +1,46 @@
 FROM alpine:latest AS alpine-packages
 
-RUN apk update && apk add --no-cache --virtual build-dependencies \
+RUN apk update && apk add --no-cache --virtual .build-dependencies \
   autoconf \
   automake \
   build-base \
   curl \
-  libjpeg-turbo-dev \
-  libpng-dev \
   libtool \
-  nasm \
-  zlib-dev
+  nasm
 
 WORKDIR /tmp
 
-# mediainfo
+# libjpeg
 RUN \
-  ZENLIB_VERSION=0.4.37 \
-  && curl -L -O https://github.com/MediaArea/ZenLib/archive/v$ZENLIB_VERSION.tar.gz \
-  && tar zxf v$ZENLIB_VERSION.tar.gz \
-  && cd ZenLib-$ZENLIB_VERSION/Project/GNU/Library \
-  && ./autogen.sh && ./configure --enable-static && make && make install
-RUN \
-  MEDIAINFO_VERSION=18.03.1 \
-  && curl -L -O https://github.com/MediaArea/MediaInfoLib/archive/v$MEDIAINFO_VERSION.tar.gz \
-  && tar zxf v$MEDIAINFO_VERSION.tar.gz \
-  && cd MediaInfoLib-$MEDIAINFO_VERSION/Project/GNU/Library \
-  && ./autogen.sh && ./configure --enable-static && make && make install
+  LIBJPEG_TURBO_VERSION=1.5.3 \
+  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
+  && ./configure --prefix /usr/local --with-jpeg8 && make && make install
 
-# imagemagick
+# zlib
 RUN \
-  curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
-  && tar zxf ImageMagick.tar.gz \
-  && cd ImageMagick-* \
-  && ./configure && make && make install
+  ZLIP_VERSION=1.2.11 \
+  && curl -L -O https://zlib.net/zlib-$ZLIP_VERSION.tar.gz \
+  && tar zxf zlib-$ZLIP_VERSION.tar.gz \
+  && cd zlib-$ZLIP_VERSION \
+  && ./configure --prefix /usr/local && make && make install
 
+# libpng
+RUN \
+  LIBPNG_VERSION=1.6.34 \
+  && curl -L -O https://download.sourceforge.net/libpng/libpng-$LIBPNG_VERSION.tar.gz \
+  && tar zxf libpng-$LIBPNG_VERSION.tar.gz \
+  && cd libpng-$LIBPNG_VERSION \
+  && ./configure --prefix /usr/local && make && make install
+
+# libwebp
+RUN \
+  LIBWEBP_VERSION=1.0.0 \
+  && curl -L -O https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-$LIBWEBP_VERSION.tar.gz \
+  && tar zxf libwebp-$LIBWEBP_VERSION.tar.gz \
+  && cd libwebp-$LIBWEBP_VERSION \
+  && ./configure --prefix /usr/local && make && make install
 
 # advancecomp
 # https://github.com/amadvance/advancecomp/releases
@@ -42,7 +49,7 @@ RUN \
   && curl -L -O https://github.com/amadvance/advancecomp/releases/download/v$ADVANCECOMP_VERSION/advancecomp-$ADVANCECOMP_VERSION.tar.gz \
   && tar zxf advancecomp-$ADVANCECOMP_VERSION.tar.gz \
   && cd advancecomp-$ADVANCECOMP_VERSION \
-  && ./configure && make && make install
+  && ./configure --prefix /usr/local && make && make install
 
 # gifsicle
 # https://github.com/kohler/gifsicle/releases
@@ -51,7 +58,7 @@ RUN \
   && curl -L -O https://lcdf.org/gifsicle/gifsicle-$GIFSICLE_VERSION.tar.gz \
   && tar zxf gifsicle-$GIFSICLE_VERSION.tar.gz \
   && cd gifsicle-$GIFSICLE_VERSION \
-  && autoreconf -i && ./configure && make && make install
+  && autoreconf -i && ./configure --prefix /usr/local && make && make install
 
 # jhead
 # https://github.com/danielgtaylor/jpeg-archive/releases
@@ -84,7 +91,7 @@ RUN \
   && curl -O http://www.kokkonen.net/tjko/src/jpegoptim-$JPEGOPTIM_VERSION.tar.gz \
   && tar zxf jpegoptim-$JPEGOPTIM_VERSION.tar.gz \
   && cd jpegoptim-$JPEGOPTIM_VERSION \
-  && ./configure && make && make install
+  && ./configure --prefix /usr/local && make && make install
 
 # jpegtran (from Independent JPEG Group)
 # http://www.ijg.org/
@@ -93,7 +100,7 @@ RUN \
   && curl -O http://www.ijg.org/files/jpegsrc.v$IJG_VERSION.tar.gz \
   && tar zxf jpegsrc.v$IJG_VERSION.tar.gz \
   && cd jpeg-$IJG_VERSION \
-  && ./configure && make && make install
+  && ./configure --prefix /usr/local && make && make install
 
 # optipng
 # https://sourceforge.net/projects/pmt/files/pngcrush/
@@ -132,7 +139,28 @@ RUN \
   && tar xzf $PNGQUANT_VERSION.tar.gz \
   && mv libimagequant-$LIBIMAGEQUANT_VERSION/* pngquant-$PNGQUANT_VERSION/lib/ \
   && cd pngquant-$PNGQUANT_VERSION \
-  && ./configure && make && make install
+  && ./configure --prefix /usr/local && make && make install
+
+# mediainfo
+RUN \
+  ZENLIB_VERSION=0.4.37 \
+  && curl -L -O https://github.com/MediaArea/ZenLib/archive/v$ZENLIB_VERSION.tar.gz \
+  && tar zxf v$ZENLIB_VERSION.tar.gz \
+  && cd ZenLib-$ZENLIB_VERSION/Project/GNU/Library \
+  && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install
+RUN \
+  MEDIAINFO_VERSION=18.03.1 \
+  && curl -L -O https://github.com/MediaArea/MediaInfoLib/archive/v$MEDIAINFO_VERSION.tar.gz \
+  && tar zxf v$MEDIAINFO_VERSION.tar.gz \
+  && cd MediaInfoLib-$MEDIAINFO_VERSION/Project/GNU/Library \
+  && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install
+
+# imagemagick
+RUN \
+  curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
+  && tar zxf ImageMagick.tar.gz \
+  && cd ImageMagick-* \
+  && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
 
 RUN \
   WKHTMLTOX_VERSION=0.12.4 \
@@ -141,7 +169,13 @@ RUN \
   && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin \
   && cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin
 
+RUN apk del .build-dependencies
+
 FROM starefossen/ruby-node:alpine
+
+RUN apk add --no-cache \
+  libgomp \
+  libtool
 
 COPY --from=alpine-packages /usr/local/bin /usr/local/bin
 COPY --from=alpine-packages /usr/local/lib /usr/local/lib
