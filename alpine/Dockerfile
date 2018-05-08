@@ -32,7 +32,7 @@ RUN \
   curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
   && tar zxf ImageMagick.tar.gz \
   && cd ImageMagick-* \
-  && ./configure && make install
+  && ./configure && make && make install
 
 
 # advancecomp
