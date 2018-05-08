@@ -3,6 +3,3 @@ ruby_node_media:
 
 ruby_node_media-alpine:
   build: alpine/.
-
-ruby_node_media-alpine-rails:
-  build: alpine-rails/.
