@@ -144,3 +144,4 @@ RUN \
 FROM starefossen/ruby-node:alpine
 
 COPY --from=alpine-packages /usr/local/bin /usr/local/bin
+COPY --from=alpine-packages /usr/local/lib /usr/local/lib
