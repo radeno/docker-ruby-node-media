@@ -153,7 +153,12 @@ RUN \
   && curl -L -O https://github.com/MediaArea/MediaInfoLib/archive/v$MEDIAINFO_VERSION.tar.gz \
   && tar zxf v$MEDIAINFO_VERSION.tar.gz \
   && cd MediaInfoLib-$MEDIAINFO_VERSION/Project/GNU/Library \
-  && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install
+  && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install \
+  && curl -L -O https://github.com/MediaArea/MediaInfo/archive/v$MEDIAINFO_VERSION.tar.gz \
+  && tar zxf v$MEDIAINFO_VERSION.tar.gz \
+  && cd MediaInfo-$MEDIAINFO_VERSION/Project/GNU/CLI \
+  && ./autogen.sh && ./configure --prefix /usr/local --enable-static --enable-staticlibs && make && make install
+
 
 # imagemagick
 RUN \
