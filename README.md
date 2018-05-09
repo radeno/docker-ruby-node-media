@@ -8,4 +8,3 @@ Two images awailable:
 
 * latest [![Image Layers](https://images.microbadger.com/badges/image/smikino/ruby-node-media:latest.svg)](https://microbadger.com/#/images/smikino/ruby-node-media:latest)
 * alpine [![Image Layers](https://images.microbadger.com/badges/image/smikino/ruby-node-media:alpine.svg)](https://microbadger.com/#/images/smikino/ruby-node-media:alpine)
-* alpine-rails [![Image Layers](https://images.microbadger.com/badges/image/smikino/ruby-node-media:alpine-rails.svg)](https://microbadger.com/#/images/smikino/ruby-node-media:alpine-rails)
