@@ -1,10 +1,13 @@
 FROM alpine:latest AS alpine-packages
 
-RUN apk update && apk add --no-cache --virtual .build-dependencies \
+RUN apk add --update --no-cache --virtual .build-dependencies \
   autoconf \
   automake \
   build-base \
   curl \
+  expat-dev \
+  glib-dev \
+  libexif \
   libtool \
   nasm
 
@@ -167,6 +170,15 @@ RUN \
   && cd ImageMagick-* \
   && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
 
+# vips
+RUN \
+  VIPS_VERSION=8.6.3 \
+  && curl -L -O https://github.com/jcupitt/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz \
+  && tar zxf vips-$VIPS_VERSION.tar.gz \
+  && cd vips-$VIPS_VERSION \
+  && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
+
+# wkhtmltopdf
 RUN \
   WKHTMLTOX_VERSION=0.12.4 \
   && curl -L -o wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/$WKHTMLTOX_VERSION/wkhtmltox-${WKHTMLTOX_VERSION}_linux-generic-amd64.tar.xz \
@@ -179,6 +191,7 @@ RUN apk del .build-dependencies
 FROM starefossen/ruby-node:alpine
 
 RUN apk add --no-cache \
+  libexif \
   libgomp \
   libtool
 
