@@ -1,4 +1,4 @@
-FROM starefossen/ruby-node:latest
+FROM starefossen/ruby-node:latest AS ubuntu-packages
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   autoconf \
@@ -21,13 +21,13 @@ RUN \
   && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
   && ./configure --prefix /usr/local --with-jpeg8 && make && make install
 
-# zlib
-RUN \
-  ZLIP_VERSION=1.2.11 \
-  && curl -L -O https://zlib.net/zlib-$ZLIP_VERSION.tar.gz \
-  && tar zxf zlib-$ZLIP_VERSION.tar.gz \
-  && cd zlib-$ZLIP_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+# # zlib
+# RUN \
+#   ZLIB_VERSION=1.2.11 \
+#   && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
+#   && tar zxf zlib-$ZLIB_VERSION.tar.gz \
+#   && cd zlib-$ZLIB_VERSION \
+#   && ./configure --prefix /usr/local && make && make install
 
 # libpng
 RUN \
@@ -186,14 +186,12 @@ RUN \
   && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin \
   && cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin
 
-RUN apk del .build-dependencies
-
-FROM starefossen/ruby-node:alpine
+FROM starefossen/ruby-node:latest
 
 RUN apt-get install -y --no-install-recommends \
   libexif12 \
   libgomp1 \
   libtool
 
-COPY --from=alpine-packages /usr/local/bin /usr/local/bin
-COPY --from=alpine-packages /usr/local/lib /usr/local/lib
+COPY --from=ubuntu-packages /usr/local/bin /usr/local/bin
+COPY --from=ubuntu-packages /usr/local/lib /usr/local/lib
