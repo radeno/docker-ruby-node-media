@@ -23,10 +23,10 @@ RUN \
 
 # zlib
 RUN \
-  ZLIP_VERSION=1.2.11 \
-  && curl -L -O https://zlib.net/zlib-$ZLIP_VERSION.tar.gz \
-  && tar zxf zlib-$ZLIP_VERSION.tar.gz \
-  && cd zlib-$ZLIP_VERSION \
+  ZLIB_VERSION=1.2.11 \
+  && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
+  && tar zxf zlib-$ZLIB_VERSION.tar.gz \
+  && cd zlib-$ZLIB_VERSION \
   && ./configure --prefix /usr/local && make && make install
 
 # libpng
