@@ -13,14 +13,6 @@ RUN apk add --update --no-cache --virtual .build-dependencies \
 
 WORKDIR /tmp
 
-# libjpeg
-RUN \
-  LIBJPEG_TURBO_VERSION=1.5.3 \
-  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
-  && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
-  && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
-  && ./configure --prefix /usr/local --with-jpeg8 && make && make install
-
 # zlib
 RUN \
   ZLIB_VERSION=1.2.11 \
@@ -35,7 +27,15 @@ RUN \
   && curl -L -O http://www.bzip.org/$BZIP2_VERSION/bzip2-$BZIP2_VERSION.tar.gz \
   && tar zxf bzip2-$BZIP2_VERSION.tar.gz \
   && cd bzip2-$BZIP2_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+  && make PREFIX=/usr/local && make install
+
+# libjpeg
+RUN \
+  LIBJPEG_TURBO_VERSION=1.5.3 \
+  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
+  && ./configure --prefix /usr/local --with-jpeg8 && make && make install
 
 # libpng
 RUN \
