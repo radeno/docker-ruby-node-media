@@ -13,14 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /tmp
 
-# libjpeg
-RUN \
-  LIBJPEG_TURBO_VERSION=1.5.3 \
-  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
-  && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
-  && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
-  && ./configure --prefix /usr/local --with-jpeg8 && make && make install
-
 # # zlib
 # RUN \
 #   ZLIB_VERSION=1.2.11 \
@@ -28,6 +20,22 @@ RUN \
 #   && tar zxf zlib-$ZLIB_VERSION.tar.gz \
 #   && cd zlib-$ZLIB_VERSION \
 #   && ./configure --prefix /usr/local && make && make install
+
+# bzip2
+RUN \
+  BZIP2_VERSION=1.0.6 \
+  && curl -L -O http://www.bzip.org/$BZIP2_VERSION/bzip2-$BZIP2_VERSION.tar.gz \
+  && tar zxf bzip2-$BZIP2_VERSION.tar.gz \
+  && cd bzip2-$BZIP2_VERSION \
+  && make PREFIX=/usr/local && make install
+
+# libjpeg
+RUN \
+  LIBJPEG_TURBO_VERSION=1.5.3 \
+  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
+  && ./configure --prefix /usr/local --with-jpeg8 && make && make install
 
 # libpng
 RUN \
@@ -43,7 +51,7 @@ RUN \
   && curl -L -O https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-$LIBWEBP_VERSION.tar.gz \
   && tar zxf libwebp-$LIBWEBP_VERSION.tar.gz \
   && cd libwebp-$LIBWEBP_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+  && ./configure --prefix /usr/local --enable-libwebpmux --enable-libwebpdemux && make && make install
 
 # advancecomp
 # https://github.com/amadvance/advancecomp/releases
@@ -165,7 +173,8 @@ RUN \
 
 # imagemagick
 RUN \
-  curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
+  cd /usr/local/lib/ && ls -la \
+  && curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
   && tar zxf ImageMagick.tar.gz \
   && cd ImageMagick-* \
   && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install

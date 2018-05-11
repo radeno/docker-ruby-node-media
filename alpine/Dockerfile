@@ -51,7 +51,7 @@ RUN \
   && curl -L -O https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-$LIBWEBP_VERSION.tar.gz \
   && tar zxf libwebp-$LIBWEBP_VERSION.tar.gz \
   && cd libwebp-$LIBWEBP_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+  && ./configure --prefix /usr/local --enable-libwebpmux --enable-libwebpdemux && make && make install
 
 # advancecomp
 # https://github.com/amadvance/advancecomp/releases
@@ -169,7 +169,6 @@ RUN \
   && tar zxf v$MEDIAINFO_VERSION.tar.gz \
   && cd MediaInfo-$MEDIAINFO_VERSION/Project/GNU/CLI \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static --enable-staticlibs && make && make install
-
 
 # imagemagick
 RUN \
