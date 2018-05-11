@@ -173,7 +173,6 @@ RUN \
 
 # imagemagick
 RUN \
-  cd /usr/local/lib/ && ls -la \
   && curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
   && tar zxf ImageMagick.tar.gz \
   && cd ImageMagick-* \
