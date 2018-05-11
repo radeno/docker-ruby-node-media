@@ -29,6 +29,14 @@ RUN \
   && cd zlib-$ZLIB_VERSION \
   && ./configure --prefix /usr/local && make && make install
 
+# bzip2
+RUN \
+  BZIP2_VERSION=1.0.6 \
+  && curl -L -O http://www.bzip.org/$BZIP2_VERSION/bzip2-$BZIP2_VERSION.tar.gz \
+  && tar zxf bzip2-$BZIP2_VERSION.tar.gz \
+  && cd bzip2-$BZIP2_VERSION \
+  && ./configure --prefix /usr/local && make && make install
+
 # libpng
 RUN \
   LIBPNG_VERSION=1.6.34 \
