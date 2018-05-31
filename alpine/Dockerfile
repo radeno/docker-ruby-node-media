@@ -175,7 +175,7 @@ RUN \
   curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
   && tar zxf ImageMagick.tar.gz \
   && cd ImageMagick-* \
-  && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
+  && ./configure --prefix /usr/local --enable-shared=no --with-modules && make && make install
 
 # vips
 RUN \
@@ -183,7 +183,7 @@ RUN \
   && curl -L -O https://github.com/jcupitt/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz \
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
-  && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
+  && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
 
 # wkhtmltopdf
 RUN \
