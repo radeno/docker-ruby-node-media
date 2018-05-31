@@ -176,7 +176,7 @@ RUN \
   curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
   && tar zxf ImageMagick.tar.gz \
   && cd ImageMagick-* \
-  && ./configure --prefix /usr/local --enable-shared=no --with-modules=no && make && make install
+  && ./configure --prefix /usr/local --enable-shared=no --with-modules=yes && make && make install
 
 # vips
 RUN \
