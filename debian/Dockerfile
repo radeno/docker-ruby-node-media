@@ -188,7 +188,7 @@ RUN \
 
 FROM starefossen/ruby-node:latest
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   libexif12 \
   libgomp1 \
   libtool

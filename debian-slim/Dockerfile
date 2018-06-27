@@ -188,7 +188,7 @@ RUN \
 
 FROM smikino/ruby-node:2-10-slim
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   libexif12 \
   libgomp1 \
   libtool
