@@ -1,25 +1,25 @@
-FROM ruby:2-alpine AS packages
+FROM ruby:2-slim-stretch AS packages
 
-RUN apk add --update --no-cache --virtual .build-dependencies \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   autoconf \
   automake \
-  build-base \
+  build-essential \
   curl \
-  expat-dev \
-  glib-dev \
-  libexif \
+  libexpat1-dev \
+  libglib2.0-dev \
+  libexif12 \
   libtool \
   nasm
 
 WORKDIR /tmp
 
-# zlib
-RUN \
-  ZLIB_VERSION=1.2.11 \
-  && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
-  && tar zxf zlib-$ZLIB_VERSION.tar.gz \
-  && cd zlib-$ZLIB_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+# # zlib
+# RUN \
+#   ZLIB_VERSION=1.2.11 \
+#   && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
+#   && tar zxf zlib-$ZLIB_VERSION.tar.gz \
+#   && cd zlib-$ZLIB_VERSION \
+#   && ./configure --prefix /usr/local && make && make install
 
 # bzip2
 RUN \
@@ -170,6 +170,7 @@ RUN \
   && cd MediaInfo-$MEDIAINFO_VERSION/Project/GNU/CLI \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static --enable-staticlibs && make && make install
 
+
 # imagemagick
 RUN \
   curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
@@ -185,13 +186,11 @@ RUN \
   && cd vips-$VIPS_VERSION \
   && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
 
-RUN apk del .build-dependencies
+FROM smikino/ruby-node:2-10-slim
 
-FROM starefossen/ruby-node:alpine
-
-RUN apk add --no-cache \
-  libexif \
-  libgomp \
+RUN apt-get install -y --no-install-recommends \
+  libexif12 \
+  libgomp1 \
   libtool
 
 COPY --from=packages /usr/local/bin /usr/local/bin

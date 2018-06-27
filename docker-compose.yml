@@ -1,5 +1,13 @@
-ruby_node_media:
-  build: .
+version: '3'
+services:
+  ruby_node_media:
+    build: debian/.
+    image: ruby-node-media:latest
 
-ruby_node_media-alpine:
-  build: alpine/.
+  ruby_node_media-slim:
+    build: debian-slim/.
+    image: ruby-node-media:slim
+
+  ruby_node_media-alpine:
+    build: alpine/.
+    image: ruby-node-media:alpine

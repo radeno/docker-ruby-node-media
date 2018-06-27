@@ -1,25 +1,10 @@
-FROM starefossen/ruby-node:latest AS ubuntu-packages
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  autoconf \
-  automake \
-  build-essential \
-  curl \
-  libexpat1-dev \
-  libglib2.0-dev \
-  libexif12 \
-  libtool \
-  nasm
-
-WORKDIR /tmp
-
-# # zlib
-# RUN \
-#   ZLIB_VERSION=1.2.11 \
-#   && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
-#   && tar zxf zlib-$ZLIB_VERSION.tar.gz \
-#   && cd zlib-$ZLIB_VERSION \
-#   && ./configure --prefix /usr/local && make && make install
+# zlib
+RUN \
+  ZLIB_VERSION=1.2.11 \
+  && curl -L -O https://zlib.net/zlib-$ZLIB_VERSION.tar.gz \
+  && tar zxf zlib-$ZLIB_VERSION.tar.gz \
+  && cd zlib-$ZLIB_VERSION \
+  && ./configure --prefix /usr/local && make && make install
 
 # bzip2
 RUN \
@@ -32,7 +17,7 @@ RUN \
 # libjpeg
 RUN \
   LIBJPEG_TURBO_VERSION=1.5.3 \
-  && curl -L -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
+  && curl --location-trusted -O https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
   && tar zxf libjpeg-turbo-$LIBJPEG_TURBO_VERSION.tar.gz \
   && cd libjpeg-turbo-$LIBJPEG_TURBO_VERSION \
   && ./configure --prefix /usr/local --with-jpeg8 && make && make install
@@ -40,7 +25,7 @@ RUN \
 # libpng
 RUN \
   LIBPNG_VERSION=1.6.34 \
-  && curl -L -O https://download.sourceforge.net/libpng/libpng-$LIBPNG_VERSION.tar.gz \
+  && curl --location-trusted -O https://download.sourceforge.net/libpng/libpng-$LIBPNG_VERSION.tar.gz \
   && tar zxf libpng-$LIBPNG_VERSION.tar.gz \
   && cd libpng-$LIBPNG_VERSION \
   && ./configure --prefix /usr/local && make && make install
@@ -117,7 +102,7 @@ RUN \
 # https://sourceforge.net/projects/pmt/files/pngcrush/
 RUN \
   OPTIPNG_VERSION=0.7.7 \
-  && curl -L -O http://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-$OPTIPNG_VERSION/optipng-$OPTIPNG_VERSION.tar.gz \
+  && curl --location-trusted -O http://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-$OPTIPNG_VERSION/optipng-$OPTIPNG_VERSION.tar.gz \
   && tar zxf optipng-$OPTIPNG_VERSION.tar.gz \
   && cd optipng-$OPTIPNG_VERSION \
   && ./configure && make && make install
@@ -125,7 +110,7 @@ RUN \
 # pngcrush
 RUN \
   PNGCRUSH_VERSION=1.8.13 \
-  && curl -L -O http://downloads.sourceforge.net/project/pmt/pngcrush/$PNGCRUSH_VERSION/pngcrush-$PNGCRUSH_VERSION.tar.gz \
+  && curl --location-trusted -O http://downloads.sourceforge.net/project/pmt/pngcrush/$PNGCRUSH_VERSION/pngcrush-$PNGCRUSH_VERSION.tar.gz \
   && tar zxf pngcrush-$PNGCRUSH_VERSION.tar.gz \
   && cd pngcrush-$PNGCRUSH_VERSION \
   && make && cp -f pngcrush /usr/local/bin
@@ -170,7 +155,6 @@ RUN \
   && cd MediaInfo-$MEDIAINFO_VERSION/Project/GNU/CLI \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static --enable-staticlibs && make && make install
 
-
 # imagemagick
 RUN \
   curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz \
@@ -185,21 +169,3 @@ RUN \
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
   && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
-
-# wkhtmltopdf
-RUN \
-  WKHTMLTOX_VERSION=0.12.4 \
-  && curl -L -o wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/$WKHTMLTOX_VERSION/wkhtmltox-${WKHTMLTOX_VERSION}_linux-generic-amd64.tar.xz \
-  && tar xf wkhtmltox.tar.xz \
-  && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin \
-  && cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin
-
-FROM starefossen/ruby-node:latest
-
-RUN apt-get install -y --no-install-recommends \
-  libexif12 \
-  libgomp1 \
-  libtool
-
-COPY --from=ubuntu-packages /usr/local/bin /usr/local/bin
-COPY --from=ubuntu-packages /usr/local/lib /usr/local/lib
