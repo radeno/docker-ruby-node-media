@@ -39,7 +39,7 @@ RUN \
 
 # libpng
 RUN \
-  LIBPNG_VERSION=1.6.34 \
+  LIBPNG_VERSION=1.6.35 \
   && curl --location-trusted -O https://download.sourceforge.net/libpng/libpng-$LIBPNG_VERSION.tar.gz \
   && tar zxf libpng-$LIBPNG_VERSION.tar.gz \
   && cd libpng-$LIBPNG_VERSION \
@@ -89,7 +89,7 @@ RUN \
   && cd mozjpeg-$MOZJPEG_VERSION \
   && autoreconf -fiv && ./configure && make && make install
 RUN \
-  JPEGARCHIVE_VERSION=2.1.1 \
+  JPEGARCHIVE_VERSION=2.2.0 \
   && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/$JPEGARCHIVE_VERSION.tar.gz \
   && tar zxf $JPEGARCHIVE_VERSION.tar.gz \
   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
@@ -142,8 +142,8 @@ RUN \
 # https://github.com/pornel/pngquant/releases
 # https://github.com/ImageOptim/libimagequant/releases
 RUN \
-  PNGQUANT_VERSION=2.11.7 \
-  LIBIMAGEQUANT_VERSION=2.11.10 \
+  PNGQUANT_VERSION=2.12.0 \
+  LIBIMAGEQUANT_VERSION=2.12.1 \
   && curl -L -O https://github.com/ImageOptim/libimagequant/archive/$LIBIMAGEQUANT_VERSION.tar.gz \
   && tar xzf $LIBIMAGEQUANT_VERSION.tar.gz \
   && curl -L -O https://github.com/pornel/pngquant/archive/$PNGQUANT_VERSION.tar.gz \
@@ -160,7 +160,7 @@ RUN \
   && cd ZenLib-$ZENLIB_VERSION/Project/GNU/Library \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install
 RUN \
-  MEDIAINFO_VERSION=18.03.1 \
+  MEDIAINFO_VERSION=18.05 \
   && curl -L -O https://github.com/MediaArea/MediaInfoLib/archive/v$MEDIAINFO_VERSION.tar.gz \
   && tar zxf v$MEDIAINFO_VERSION.tar.gz \
   && cd MediaInfoLib-$MEDIAINFO_VERSION/Project/GNU/Library \
@@ -169,7 +169,6 @@ RUN \
   && tar zxf v$MEDIAINFO_VERSION.tar.gz \
   && cd MediaInfo-$MEDIAINFO_VERSION/Project/GNU/CLI \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static --enable-staticlibs && make && make install
-
 
 # imagemagick
 RUN \
@@ -180,7 +179,7 @@ RUN \
 
 # vips
 RUN \
-  VIPS_VERSION=8.6.3 \
+  VIPS_VERSION=8.6.5 \
   && curl -L -O https://github.com/jcupitt/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz \
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
