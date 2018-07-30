@@ -91,7 +91,7 @@ RUN \
 RUN \
   JPEGARCHIVE_VERSION=2.2.0 \
   && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/v$JPEGARCHIVE_VERSION.tar.gz \
-  && tar zxf jpeg-archive-$JPEGARCHIVE_VERSION.tar.gz \
+  && tar zxf v$JPEGARCHIVE_VERSION.tar.gz \
   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
   && make && make install
 
