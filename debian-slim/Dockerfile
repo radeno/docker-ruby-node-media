@@ -90,8 +90,8 @@ RUN \
   && autoreconf -fiv && ./configure && make && make install
 RUN \
   JPEGARCHIVE_VERSION=2.2.0 \
-  && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/$JPEGARCHIVE_VERSION.tar.gz \
-  && tar zxf $JPEGARCHIVE_VERSION.tar.gz \
+  && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/v$JPEGARCHIVE_VERSION.tar.gz \
+  && tar zxf jpeg-archive-$JPEGARCHIVE_VERSION.tar.gz \
   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
   && make && make install
 
