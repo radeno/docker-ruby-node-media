@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   ruby_node_media:
     build: debian/.
