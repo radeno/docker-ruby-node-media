@@ -23,7 +23,7 @@ RUN \
 
 # bzip2
 RUN \
-  BZIP2_VERSION=1.0.6 \
+  BZIP2_VERSION=1.0.8 \
   && curl -L -O https://sourceforge.net/projects/bzip2/files/bzip2-$BZIP2_VERSION.tar.gz \
   && tar zxf bzip2-$BZIP2_VERSION.tar.gz \
   && cd bzip2-$BZIP2_VERSION \
@@ -39,7 +39,7 @@ RUN \
 
 # libpng
 RUN \
-  LIBPNG_VERSION=1.6.36 \
+  LIBPNG_VERSION=1.6.37 \
   && curl -L -O https://sourceforge.net/projects/libpng/files/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz \
   && tar zxf libpng-$LIBPNG_VERSION.tar.gz \
   && cd libpng-$LIBPNG_VERSION \
@@ -47,7 +47,7 @@ RUN \
 
 # libwebp
 RUN \
-  LIBWEBP_VERSION=1.0.1 \
+  LIBWEBP_VERSION=1.0.3 \
   && curl -L -O https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-$LIBWEBP_VERSION.tar.gz \
   && tar zxf libwebp-$LIBWEBP_VERSION.tar.gz \
   && cd libwebp-$LIBWEBP_VERSION \
@@ -65,7 +65,7 @@ RUN \
 # gifsicle
 # https://github.com/kohler/gifsicle/releases
 RUN \
-  GIFSICLE_VERSION=1.91 \
+  GIFSICLE_VERSION=1.92 \
   && curl -L -O https://lcdf.org/gifsicle/gifsicle-$GIFSICLE_VERSION.tar.gz \
   && tar zxf gifsicle-$GIFSICLE_VERSION.tar.gz \
   && cd gifsicle-$GIFSICLE_VERSION \
@@ -74,8 +74,8 @@ RUN \
 # jhead
 # http://www.sentex.net/~mwandel/jhead/
 RUN \
-  JHEAD_VERSION=3.00 \
-  && curl -O http://www.sentex.net/~mwandel/jhead/jhead-$JHEAD_VERSION.tar.gz \
+  JHEAD_VERSION=3.04 \
+  && curl -O https://www.sentex.ca/~mwandel/jhead/jhead-$JHEAD_VERSION.tar.gz \
   && tar zxf jhead-$JHEAD_VERSION.tar.gz \
   && cd jhead-$JHEAD_VERSION \
   && make && make install
@@ -147,8 +147,8 @@ RUN \
 # https://github.com/pornel/pngquant/releases
 # https://github.com/ImageOptim/libimagequant/releases
 RUN \
-  PNGQUANT_VERSION=2.12.2 \
-  LIBIMAGEQUANT_VERSION=2.12.2 \
+  PNGQUANT_VERSION=2.12.6 \
+  LIBIMAGEQUANT_VERSION=2.12.6 \
   && curl -L -O https://github.com/ImageOptim/libimagequant/archive/$LIBIMAGEQUANT_VERSION.tar.gz \
   && tar xzf $LIBIMAGEQUANT_VERSION.tar.gz \
   && curl -L -O https://github.com/pornel/pngquant/archive/$PNGQUANT_VERSION.tar.gz \
@@ -167,7 +167,7 @@ RUN \
   && cd ZenLib-$ZENLIB_VERSION/Project/GNU/Library \
   && ./autogen.sh && ./configure --prefix /usr/local --enable-static && make && make install
 RUN \
-  MEDIAINFO_VERSION=18.08.1 \
+  MEDIAINFO_VERSION=19.09 \
   && curl -L -O https://github.com/MediaArea/MediaInfoLib/archive/v$MEDIAINFO_VERSION.tar.gz \
   && tar zxf v$MEDIAINFO_VERSION.tar.gz \
   && cd MediaInfoLib-$MEDIAINFO_VERSION/Project/GNU/Library \
@@ -187,7 +187,7 @@ RUN \
 # vips
 # https://github.com/jcupitt/libvips/releases/
 RUN \
-  VIPS_VERSION=8.7.1 \
+  VIPS_VERSION=8.9.0 \
   && curl -L -O https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz\
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
