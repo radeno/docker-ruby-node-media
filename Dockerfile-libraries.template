@@ -9,7 +9,7 @@ RUN \
 # bzip2
 RUN \
   BZIP2_VERSION=1.0.8 \
-  && curl -L -O https://sourceforge.net/projects/bzip2/files/bzip2-$BZIP2_VERSION.tar.gz \
+  && curl -L -O https://sourceware.org/pub/bzip2/bzip2-$BZIP2_VERSION.tar.gz \
   && tar zxf bzip2-$BZIP2_VERSION.tar.gz \
   && cd bzip2-$BZIP2_VERSION \
   && make PREFIX=/usr/local && make install
