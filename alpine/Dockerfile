@@ -137,8 +137,8 @@ RUN \
 # pngout (binary distrib)
 # http://www.jonof.id.au/kenutils
 RUN \
-  PNGOUT_VERSION=20150319 \
-  && curl -O http://static.jonof.id.au/dl/kenutils/pngout-$PNGOUT_VERSION-linux-static.tar.gz \
+  PNGOUT_VERSION=20200115 \
+  && curl -O http://www.jonof.id.au/files/kenutils/pngout-$PNGOUT_VERSION-linux.tar.gz \
   && tar zxf pngout-$PNGOUT_VERSION-linux-static.tar.gz \
   && cd pngout-$PNGOUT_VERSION-linux-static \
   && cp -f x86_64/pngout-static /usr/local/bin/pngout
