@@ -1,4 +1,4 @@
-FROM ruby:2-slim-stretch AS packages
+FROM ruby:2-slim AS packages
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   autoconf \
