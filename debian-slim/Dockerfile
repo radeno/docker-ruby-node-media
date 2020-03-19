@@ -133,7 +133,7 @@ RUN \
   && curl -O http://www.jonof.id.au/files/kenutils/pngout-$PNGOUT_VERSION-linux.tar.gz \
   && tar zxf pngout-$PNGOUT_VERSION-linux.tar.gz \
   && cd pngout-$PNGOUT_VERSION-linux \
-  && cp -f x86_64/pngout /usr/local/bin/pngout
+  && cp -f amd64/pngout /usr/local/bin/pngout
 
 # pngquant
 # https://github.com/pornel/pngquant/releases
