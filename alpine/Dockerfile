@@ -47,7 +47,7 @@ RUN \
 
 # libwebp
 RUN \
-  LIBWEBP_VERSION=1.0.3 \
+  LIBWEBP_VERSION=1.1.0 \
   && curl -L -O https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-$LIBWEBP_VERSION.tar.gz \
   && tar zxf libwebp-$LIBWEBP_VERSION.tar.gz \
   && cd libwebp-$LIBWEBP_VERSION \
@@ -187,7 +187,7 @@ RUN \
 # vips
 # https://github.com/jcupitt/libvips/releases/
 RUN \
-  VIPS_VERSION=8.9.0 \
+  VIPS_VERSION=8.9.2 \
   && curl -L -O https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz\
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
@@ -202,5 +202,7 @@ RUN apk add --no-cache \
   libgomp \
   libtool
 
+COPY --from=packages /usr/bin /usr/bin
+COPY --from=packages /usr/lib /usr/lib
 COPY --from=packages /usr/local/bin /usr/local/bin
 COPY --from=packages /usr/local/lib /usr/local/lib
