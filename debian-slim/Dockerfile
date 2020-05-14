@@ -1,4 +1,4 @@
-FROM ruby:2-slim AS packages
+FROM smikino/ruby-node:2-10-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   autoconf \
@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libexpat1-dev \
   libglib2.0-dev \
   libexif12 \
+  libgomp1 \
   libtool \
   nasm
 
@@ -184,15 +185,3 @@ RUN \
   && tar zxf vips-$VIPS_VERSION.tar.gz \
   && cd vips-$VIPS_VERSION \
   && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
-
-FROM smikino/ruby-node:2-10-slim
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  libexif12 \
-  libgomp1 \
-  libtool
-
-COPY --from=packages /usr/bin /usr/bin
-COPY --from=packages /usr/lib /usr/lib
-COPY --from=packages /usr/local/bin /usr/local/bin
-COPY --from=packages /usr/local/lib /usr/local/lib

@@ -1,4 +1,4 @@
-FROM ruby:2-alpine AS packages
+FROM smikino/ruby-node:2-10-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies \
   autoconf \
@@ -7,6 +7,7 @@ RUN apk add --update --no-cache --virtual .build-dependencies \
   curl \
   expat-dev \
   glib-dev \
+  libgomp \
   libexif \
   libtool \
   nasm
@@ -196,13 +197,3 @@ RUN \
 RUN apk del .build-dependencies
 
 FROM smikino/ruby-node:2-10-alpine
-
-RUN apk add --no-cache \
-  libexif \
-  libgomp \
-  libtool
-
-COPY --from=packages /usr/bin /usr/bin
-COPY --from=packages /usr/lib /usr/lib
-COPY --from=packages /usr/local/bin /usr/local/bin
-COPY --from=packages /usr/local/lib /usr/local/lib
