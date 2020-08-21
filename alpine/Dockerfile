@@ -27,7 +27,7 @@ RUN apk add --update --no-cache --virtual \
   optipng \
   pngcrush \
   pngquant \
-  # vips \
+  vips \
   zlib
 
 WORKDIR /tmp
@@ -205,11 +205,11 @@ RUN \
 
 # vips
 # https://github.com/jcupitt/libvips/releases/
-RUN \
-  VIPS_VERSION=8.9.2 \
-  && curl -L -O https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz\
-  && tar zxf vips-$VIPS_VERSION.tar.gz \
-  && cd vips-$VIPS_VERSION \
-  && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
+# RUN \
+#   VIPS_VERSION=8.9.2 \
+#   && curl -L -O https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz\
+#   && tar zxf vips-$VIPS_VERSION.tar.gz \
+#   && cd vips-$VIPS_VERSION \
+#   && ./configure --prefix /usr/local --with-modules=no --without-magick && make && make install
 
 RUN apk del .build-dependencies
