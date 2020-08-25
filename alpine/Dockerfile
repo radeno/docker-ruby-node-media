@@ -23,6 +23,8 @@ RUN apk add --update --no-cache --virtual \
   libjpeg-turbo \
   libtool \
   libwebp \
+  libxml2 \
+  libxslt \
   mediainfo \
   optipng \
   pngcrush \
