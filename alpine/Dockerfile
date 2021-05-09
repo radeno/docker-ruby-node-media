@@ -108,13 +108,13 @@ RUN \
   && curl -L -O https://github.com/mozilla/mozjpeg/archive/v$MOZJPEG_VERSION.tar.gz \
   && tar zxf v$MOZJPEG_VERSION.tar.gz \
   && cd mozjpeg-$MOZJPEG_VERSION \
-  && autoreconf -fiv && ./configure && make && make install
+  && autoreconf -fiv && ./configure --with-jpeg8 && make && make install
 
 # jpeg-archive
 # https://github.com/danielgtaylor/jpeg-archive/releases
 RUN \
   JPEGARCHIVE_VERSION=2.2.0 \
-  && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/v$JPEGARCHIVE_VERSION.tar.gz \
+  && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/refs/tags/v$JPEGARCHIVE_VERSION.tar.gz \
   && tar zxf v$JPEGARCHIVE_VERSION.tar.gz \
   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
   && make && make install
