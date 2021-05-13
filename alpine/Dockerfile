@@ -10,10 +10,12 @@ RUN apk add --update --no-cache --virtual .build-dependencies \
   libgomp \
   libpng-dev \
   libtool \
-  nasm
+  nasm \
+  pkgconf
 
 RUN apk add --update --no-cache --virtual \
   bzip \
+  advancecomp \
   imagemagick \
   gifsicle \
   # jhead \
@@ -76,12 +78,12 @@ WORKDIR /tmp
 
 # advancecomp
 # https://github.com/amadvance/advancecomp/releases
-RUN \
-  ADVANCECOMP_VERSION=2.1 \
-  && curl -L -O https://github.com/amadvance/advancecomp/releases/download/v$ADVANCECOMP_VERSION/advancecomp-$ADVANCECOMP_VERSION.tar.gz \
-  && tar zxf advancecomp-$ADVANCECOMP_VERSION.tar.gz \
-  && cd advancecomp-$ADVANCECOMP_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+# RUN \
+#   ADVANCECOMP_VERSION=2.1 \
+#   && curl -L -O https://github.com/amadvance/advancecomp/releases/download/v$ADVANCECOMP_VERSION/advancecomp-$ADVANCECOMP_VERSION.tar.gz \
+#   && tar zxf advancecomp-$ADVANCECOMP_VERSION.tar.gz \
+#   && cd advancecomp-$ADVANCECOMP_VERSION \
+#   && ./configure --prefix /usr/local && make && make install
 
 # # gifsicle
 # # https://github.com/kohler/gifsicle/releases
