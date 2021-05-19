@@ -1,4 +1,4 @@
-FROM smikino/ruby-node:2-10-alpine
+FROM smikino/ruby-node:2-12-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies \
   autoconf \

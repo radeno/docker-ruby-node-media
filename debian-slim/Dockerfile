@@ -1,4 +1,4 @@
-FROM smikino/ruby-node:2-10-slim
+FROM smikino/ruby-node:2-12-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   autoconf \
