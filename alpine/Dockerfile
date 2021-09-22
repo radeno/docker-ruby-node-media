@@ -23,6 +23,7 @@ RUN apk add --update --no-cache --virtual \
   libpng \
   libexif \
   libjpeg-turbo \
+  libjpeg-turbo-utils \
   libtool \
   libwebp \
   libxml2 \
@@ -114,12 +115,22 @@ RUN \
 
 # jpeg-archive
 # https://github.com/danielgtaylor/jpeg-archive/releases
-RUN \
-  JPEGARCHIVE_VERSION=2.2.0 \
-  && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/refs/tags/v$JPEGARCHIVE_VERSION.tar.gz \
-  && tar zxf v$JPEGARCHIVE_VERSION.tar.gz \
-  && cd jpeg-archive-$JPEGARCHIVE_VERSION \
-  && make && make install
+# RUN \
+#   JPEGARCHIVE_VERSION=2.2.0 \
+#   && curl -L -O https://github.com/danielgtaylor/jpeg-archive/archive/refs/tags/v$JPEGARCHIVE_VERSION.tar.gz \
+#   && tar zxf v$JPEGARCHIVE_VERSION.tar.gz \
+#   && cd jpeg-archive-$JPEGARCHIVE_VERSION \
+#   && make && make install
+
+# jpeg-recompress
+# https://github.com/ImageProcessing-ElectronicPublications/jpeg-recompress/releases
+# RUN \
+#   JPEG_RECOMPRESS=2.3.1 \
+#   && curl -L -O https://github.com/ImageProcessing-ElectronicPublications/jpeg-recompress/archive/refs/tags/$JPEG_RECOMPRESS.tar.gz \
+#   && tar zxf $JPEG_RECOMPRESS.tar.gz \
+#   && ls -la \
+#   && cd jpeg-recompress-$JPEG_RECOMPRESS \
+#   && make && make install
 
 # # jpegoptim
 # # http://www.kokkonen.net/tjko/projects.html#jpegoptim
@@ -132,12 +143,12 @@ RUN \
 
 # jpegtran (from Independent JPEG Group)
 # http://www.ijg.org/
-RUN \
-  IJG_VERSION=9c \
-  && curl -O http://www.ijg.org/files/jpegsrc.v$IJG_VERSION.tar.gz \
-  && tar zxf jpegsrc.v$IJG_VERSION.tar.gz \
-  && cd jpeg-$IJG_VERSION \
-  && ./configure --prefix /usr/local && make && make install
+# RUN \
+#   IJG_VERSION=9c \
+#   && curl -O http://www.ijg.org/files/jpegsrc.v$IJG_VERSION.tar.gz \
+#   && tar zxf jpegsrc.v$IJG_VERSION.tar.gz \
+#   && cd jpeg-$IJG_VERSION \
+#   && ./configure --prefix /usr/local && make && make install
 
 # # optipng
 # # https://sourceforge.net/projects/optipng/files/OptiPNG/
