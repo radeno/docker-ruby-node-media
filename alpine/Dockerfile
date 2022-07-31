@@ -97,9 +97,10 @@ WORKDIR /tmp
 
 # jhead
 # http://www.sentex.net/~mwandel/jhead/
+# https://fossies.org/linux/privat/jhead-3.06.0.1.tar.gz/fp_index_dc.html
 RUN \
-  JHEAD_VERSION=3.04 \
-  && curl -O https://www.sentex.ca/~mwandel/jhead/jhead-$JHEAD_VERSION.tar.gz \
+  JHEAD_VERSION=3.06.0.1 \
+  && curl -O https://fossies.org/linux/privat/jhead-$JHEAD_VERSION.tar.gz \
   && tar zxf jhead-$JHEAD_VERSION.tar.gz \
   && cd jhead-$JHEAD_VERSION \
   && make && make install
