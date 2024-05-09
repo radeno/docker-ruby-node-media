@@ -1,4 +1,4 @@
-FROM smikino/ruby-node:3.0-16-slim
+FROM smikino/ruby-node:3.1-16-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   advancecomp \

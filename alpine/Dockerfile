@@ -1,4 +1,4 @@
-FROM smikino/ruby-node:3.0-16-alpine
+FROM smikino/ruby-node:3.1-16-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies \
   autoconf \
